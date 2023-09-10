@@ -27,7 +27,7 @@ public class DeveloperData implements ApplicationRunner {
   }
 
   //Obviously this data setup must never be used in production
-  private final String passwordUsedByAll = "test12";
+ // private final String passwordUsedByAll = "test12";
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -41,8 +41,8 @@ public class DeveloperData implements ApplicationRunner {
     carRepository.save(car1);
     memberRepository.save(m1);
 
-    LocalDate date1 = LocalDate.now().plusDays(2);
-    LocalDate date2 = LocalDate.now().plusDays(3);
+    LocalDate date1 = LocalDate.of(2023,12,12);
+    LocalDate date2 = LocalDate.now().plusDays(1);
     Reservation r1 = new Reservation(date1, car1, m1);
     Reservation r2 = new Reservation(date2, car1, m1);
     reservationRepository.save(r1);
@@ -50,6 +50,8 @@ public class DeveloperData implements ApplicationRunner {
 
     System.out.println("xxxx ------> "+car1.getReservations().size());
     System.out.println("xxxx ------> "+m1.getReservations().size());
+    System.out.println("skal finde " +reservationRepository.existsByCar_IdAndRentalDate(car1.getId(), date1) );
+    System.out.println("skal ikke finde " +reservationRepository.existsByCar_IdAndRentalDate(car1.getId(), date1.minusDays(2)) );
 
   }
 
