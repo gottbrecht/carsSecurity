@@ -1,10 +1,13 @@
-package dat3.security.api;
+package security.api;
 
+import dat3.car.dto.LoginRequest;
+import dat3.car.dto.LoginResponse;
 import dat3.security.service.UserDetailsServiceImp;
 import dat3.security.dto.LoginRequest;
 import dat3.security.dto.LoginResponse;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +19,7 @@ import org.springframework.security.oauth2.jwt.*;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import security.UserWithRoles;
 
 import java.time.Instant;
 import java.util.List;
@@ -36,8 +40,8 @@ public class AuthenticationController {
 
     private AuthenticationManager authenticationManager;
 
-    JwtEncoder encoder;
-    public AuthenticationController(AuthenticationManager authenticationManager, JwtEncoder encoder) {
+    OAuth2ResourceServerProperties.Jwt encoder;
+    public AuthenticationController(AuthenticationManager authenticationManager, OAuth2ResourceServerProperties.Jwt encoder) {
         this.authenticationManager = authenticationManager;
         this.encoder = encoder;
     }

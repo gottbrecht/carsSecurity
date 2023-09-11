@@ -1,7 +1,7 @@
-package dat3.car.api;
+package security.api;
 
-import dat3.car.dto.UserWithRolesRequest;
-import dat3.car.dto.UserWithRolesResponse;
+import security.UserWithRolesRequest;
+import security.UserWithRolesResponse;
 import dat3.car.service.UserWithRolesService;
 import org.springframework.context.annotation.Role;
 import org.springframework.security.access.prepost.PreAuthorize;

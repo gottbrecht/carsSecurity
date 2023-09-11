@@ -1,4 +1,4 @@
-package dat3.car.dto;
+package security;
 
 
 import lombok.Getter;

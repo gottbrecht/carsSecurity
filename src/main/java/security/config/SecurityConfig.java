@@ -1,4 +1,4 @@
-package dat3.car.config;
+package security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +30,7 @@ import java.beans.Customizer;
     public class SecurityConfig {
 
         //Remove default value below BEFORE deployment
-        @Value("${app.secret-key}")
+        //@Value("${app.secret-key}")
         private String tokenSecret;
 
         @Autowired
@@ -82,7 +82,7 @@ import java.beans.Customizer;
         }
 
         @Bean
-        public JwtAuthenticationConverter authenticationConverter() {
+        public <JwtAuthenticationConverter, JwtGrantedAuthoritiesConverter> JwtAuthenticationConverter authenticationConverter() {
             JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
             jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("roles");
             jwtGrantedAuthoritiesConverter.setAuthorityPrefix("");

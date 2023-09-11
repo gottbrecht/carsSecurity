@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import security.UserWithRoles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 // ----Lombok anotations above --------- //
 @Entity
-public class Member extends AdminDetails  {
+public class Member extends UserWithRoles {
 
   @Id
   private String username;

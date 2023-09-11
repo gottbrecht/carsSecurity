@@ -1,7 +1,6 @@
-package dat3.car.dto;
+package security;
 
 import lombok.*;
-import dat3.security.entity.UserWithRole;
 
 @Getter
 @Setter
@@ -17,4 +16,4 @@ public class UserWithRolesRequest {
     String email;
     }
 
-}
+
