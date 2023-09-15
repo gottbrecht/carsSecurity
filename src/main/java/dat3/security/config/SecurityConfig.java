@@ -1,4 +1,4 @@
-package security.config;
+package dat3.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

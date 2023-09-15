@@ -6,6 +6,10 @@ import dat3.car.entity.Reservation;
 import dat3.car.repository.CarRepository;
 import dat3.car.repository.MemberRepository;
 import dat3.car.repository.ReservationRepository;
+import dat3.security.entity.Role;
+import dat3.security.entity.UserWithRoles;
+import dat3.security.repository.UserWithRolesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +31,7 @@ public class DeveloperData implements ApplicationRunner {
   }
 
   //Obviously this data setup must never be used in production
- // private final String passwordUsedByAll = "test12";
+  // private final String passwordUsedByAll = "test12";
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -37,22 +41,47 @@ public class DeveloperData implements ApplicationRunner {
     carRepository.saveAll(cars);
 
     Car car1 = new Car("VW", "Golf", 760, 25);
-    Member m1 = new Member("Jan","test12","a@b.dk","Jan","Jensen","Lyngbyvej 1","Lyngby","2800");
+    Member m1 = new Member("Jan", "test12", "a@b.dk", "Jan", "Jensen", "Lyngbyvej 1", "Lyngby", "2800");
     carRepository.save(car1);
     memberRepository.save(m1);
 
-    LocalDate date1 = LocalDate.of(2023,12,12);
+    LocalDate date1 = LocalDate.of(2023, 12, 12);
     LocalDate date2 = LocalDate.now().plusDays(1);
     Reservation r1 = new Reservation(date1, car1, m1);
     Reservation r2 = new Reservation(date2, car1, m1);
     reservationRepository.save(r1);
     reservationRepository.save(r2);
 
-    System.out.println("xxxx ------> "+car1.getReservations().size());
-    System.out.println("xxxx ------> "+m1.getReservations().size());
-    System.out.println("skal finde " +reservationRepository.existsByCar_IdAndRentalDate(car1.getId(), date1) );
-    System.out.println("skal ikke finde " +reservationRepository.existsByCar_IdAndRentalDate(car1.getId(), date1.minusDays(2)) );
+    System.out.println("xxxx ------> " + car1.getReservations().size());
+    System.out.println("xxxx ------> " + m1.getReservations().size());
+    System.out.println("skal finde " + reservationRepository.existsByCar_IdAndRentalDate(car1.getId(), date1));
+    System.out.println("skal ikke finde " + reservationRepository.existsByCar_IdAndRentalDate(car1.getId(), date1.minusDays(2)));
 
   }
 
+  @Autowired
+  UserWithRolesRepository userWithRolesRepository;
+  final String passwordUsedByAll = "sommer123";
+
+
+  private void setupUserWithRoleUsers() {
+
+    System.out.println("**************************");
+    System.out.println("**************************");
+    System.out.println("**************************");
+    System.out.println("**************************");
+    UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@bib.dk");
+    UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@bib.dk");
+    UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@bib.dk");
+    UserWithRoles user4 = new UserWithRoles("user4", passwordUsedByAll, "user4@bib.dk");
+    user1.addRole(Role.USER);
+    user1.addRole(Role.ADMIN);
+    user2.addRole(Role.USER);
+    user3.addRole(Role.ADMIN);
+
+   // userWithRolesRepository.save(user1);
+   // userWithRolesRepository.save(user2);
+   // userWithRolesRepository.save(user3);
+   // userWithRolesRepository.save(user4);
+  }
 }

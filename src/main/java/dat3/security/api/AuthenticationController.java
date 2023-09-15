@@ -1,11 +1,7 @@
-package security.api;
+package dat3.security.api;
 
 import dat3.car.dto.LoginRequest;
 import dat3.car.dto.LoginResponse;
-import dat3.security.service.UserDetailsServiceImp;
-import dat3.security.dto.LoginRequest;
-import dat3.security.dto.LoginResponse;
-import dat3.security.entity.UserWithRoles;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.http.HttpStatus;
@@ -15,11 +11,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.jwt.*;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import security.UserWithRoles;
+import dat3.security.service.UserDetailsServiceImp;
 
 import java.time.Instant;
 import java.util.List;

@@ -2,7 +2,10 @@ package dat3.car.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +21,6 @@ public class Car extends AdminDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-
   @Column(name = "car_brand", length = 50, nullable = false)
   private String brand;
   @Column(name = "car_model", length = 60, nullable = false)
@@ -29,15 +31,29 @@ public class Car extends AdminDetails {
   private Integer bestDiscount;
 
 
-  @OneToMany(mappedBy = "car")
-  List<Reservation> reservations;
-
   public void addReservation(Reservation reservation){
     if (reservations == null){
       reservations = new ArrayList<>();
     }
     reservations.add(reservation);
   }
+
+
+  @OneToMany(mappedBy = "car")
+  List<Reservation> reservations;
+
+  @CreationTimestamp
+  LocalDateTime created;
+
+  @UpdateTimestamp
+  LocalDateTime edited;
+
+  @OneToOne
+  Member member;
+  @ManyToOne
+  Reservation reservation;
+
+
 
 
   public Car(String brand, String model, double pricePrDay, Integer bestDiscount) {

@@ -1,9 +1,10 @@
-package security;
+package dat3.security.dto;
 
 
+import dat3.security.entity.UserWithRoles;
 import lombok.Getter;
 import lombok.Setter;
-import dat3.security.entity.UserWithRole;
+import dat3.security.entity.UserWithRoles;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class UserWithRolesResponse {
 
     public UserWithRolesResponse(UserWithRoles userWithRoles){
         this.userName = userWithRoles.getUsername();
-        this.roleNames = userWithRoles.getRole().stream().map(role -> role.toString()).collect(Collectors.toList());
+        this.roleNames = userWithRoles.getRoles().stream().map(role -> role.toString()).collect(Collectors.toList());
         this.email = userWithRoles.getEmail();
     }
 

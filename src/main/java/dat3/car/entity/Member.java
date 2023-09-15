@@ -1,5 +1,6 @@
 package dat3.car.entity;
 
+import dat3.security.entity.UserWithRoles;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,7 +8,6 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import security.UserWithRoles;
 
 import java.util.ArrayList;
 import java.util.List;
