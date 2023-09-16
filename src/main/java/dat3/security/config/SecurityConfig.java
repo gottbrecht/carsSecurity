@@ -36,7 +36,7 @@ import java.beans.Customizer;
         @Autowired
         CorsConfigurationSource corsConfigurationSource;
 
-        @Bean
+   /*     @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
             http
@@ -108,7 +108,7 @@ import java.beans.Customizer;
                     new ImmutableSecret<SecurityContext>(secretKey())
             );
         }
-
+*/
         @Bean
         public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
                 throws Exception {
@@ -117,4 +117,4 @@ import java.beans.Customizer;
 
     }
 
-}
+

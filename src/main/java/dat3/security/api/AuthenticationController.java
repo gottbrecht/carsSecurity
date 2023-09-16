@@ -2,6 +2,10 @@ package dat3.security.api;
 
 import dat3.car.dto.LoginRequest;
 import dat3.car.dto.LoginResponse;
+import dat3.car.entity.Member;
+import dat3.security.entity.Role;
+import dat3.security.entity.UserWithRoles;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.http.HttpStatus;
@@ -12,10 +16,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import dat3.security.service.UserDetailsServiceImp;
 
+import javax.management.relation.RoleInfo;
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +31,7 @@ import static java.util.stream.Collectors.joining;
 @RestController
 @RequestMapping("/api/auth/")
 @CrossOrigin
-public class AuthenticationController {
+public class AuthenticationController<JwtClaimsSet, JwsHeader> {
 
     @Value("${app.token-issuer}")
     private String tokenIssuer;
@@ -36,16 +42,18 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     OAuth2ResourceServerProperties.Jwt encoder;
+
     public AuthenticationController(AuthenticationManager authenticationManager, OAuth2ResourceServerProperties.Jwt encoder) {
         this.authenticationManager = authenticationManager;
         this.encoder = encoder;
     }
-
+}
+/*
     @PostMapping("login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
 
         try {
-            UsernamePasswordAuthenticationToken uat = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
+            UsernamePasswordAuthenticationToken uat = new UsernamePasswordAuthenticationToken(request.getClass().getName(), request.getClass().getName());
             Authentication authentication = authenticationManager.authenticate(uat);
 
             UserWithRoles user = (UserWithRoles) authentication.getPrincipal();
@@ -55,8 +63,7 @@ public class AuthenticationController {
                     .map(GrantedAuthority::getAuthority)
                     .collect(joining(" "));
 
-            JwtClaimsSet claims = JwtClaimsSet.builder()
-                    .issuer(tokenIssuer)  //Only this for simplicity
+            JwtClaimsSet claims = JwtClaimsSet.builder().issuer(tokenIssuer)  //Only this for simplicity
                     .issuedAt(now)
                     .expiresAt(now.plusSeconds(tokenExpiration))
                     .subject(user.getUsername())
@@ -71,8 +78,9 @@ public class AuthenticationController {
                     .body(new LoginResponse(user.getUsername(), token, roles));
 
         } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, UserDetailsServiceImp.WRONG_USERNAME_OR_PASSWORD);
+          throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, UserDetailsServiceImp.WRONG_USERNAME_OR_PASSWORD);
         }
 
     }
-}
+ }
+*/

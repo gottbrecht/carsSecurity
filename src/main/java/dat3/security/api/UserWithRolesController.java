@@ -1,7 +1,8 @@
 package dat3.security.api;
-
+/*
 import dat3.security.dto.UserWithRolesRequest;
 import dat3.security.dto.UserWithRolesResponse;
+import dat3.security.service.UserWithRolesService;
 import org.springframework.context.annotation.Role;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserWithRolesController {
 
         //Take care with this. If no role is required for new users, add null as the value below
-    static Role DEFAULT_ROLE_TO_ASSIGN = Role.USER;
+    //static Role DEFAULT_ROLE_TO_ASSIGN = Role.USER;
 
     UserWithRolesService userWithRoleService;
 
@@ -39,4 +40,6 @@ public class UserWithRolesController {
             return userWithRoleService.removeRole(username, Role.fromString(role));
         }
     }
+   }
 
+ */
