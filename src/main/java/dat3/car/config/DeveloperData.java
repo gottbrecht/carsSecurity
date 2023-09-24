@@ -39,11 +39,21 @@ public class DeveloperData implements ApplicationRunner {
     memberRepository.saveAll(members);
     List<Car> cars = CarTestDataFactory.generateTestCars();
     carRepository.saveAll(cars);
-
-    Car car1 = new Car("VW", "Golf", 760, 25);
-    Member m1 = new Member("Jan", "test12", "a@b.dk", "Jan", "Jensen", "Lyngbyvej 1", "Lyngby", "2800");
-    carRepository.save(car1);
+ //   Car car1 = new Car("VW", "Golf", 760, 25);
+    Member m1 = new Member("Jan", "sommer123", "a@b.dk", "Jan", "Jensen", "Lyngbyvej 1", "Lyngby", "2800");
+//    carRepository.save(car1);
     memberRepository.save(m1);
+
+    Car car1 = Car.builder()
+            .brand("Volvo")
+            .model("V70")
+            .pricePrDay(700)
+            .bestDiscount(30)
+            .build();
+
+    carRepository.save(car1);
+
+
 
     LocalDate date1 = LocalDate.of(2023, 12, 12);
     LocalDate date2 = LocalDate.now().plusDays(1);
@@ -54,34 +64,40 @@ public class DeveloperData implements ApplicationRunner {
 
     System.out.println("xxxx ------> " + car1.getReservations().size());
     System.out.println("xxxx ------> " + m1.getReservations().size());
-    System.out.println("skal finde " + reservationRepository.existsByCar_IdAndRentalDate(car1.getId(), date1));
-    System.out.println("skal ikke finde " + reservationRepository.existsByCar_IdAndRentalDate(car1.getId(), date1.minusDays(2)));
+    System.out.println("skal finde " + reservationRepository.existsByCar_IdAndRentalDate(car1, date1));
+    System.out.println("skal ikke finde " + reservationRepository.existsByCar_IdAndRentalDate(car1, date1.minusDays(2)));
 
+    setupUserWithRoleUsers();
   }
 
-  @Autowired
-  UserWithRolesRepository userWithRolesRepository;
-  final String passwordUsedByAll = "sommer123";
+    @Autowired
+    UserWithRolesRepository userWithRolesRepository;
+    final String passwordUsedByAll = "test12";
 
+/*****************************************************************************************
+ NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL
+ iT'S ONE OF THE TOP SECURITY FLAWS YOU CAN DO
+ *****************************************************************************************/
+    private void setupUserWithRoleUsers() {
 
-  private void setupUserWithRoleUsers() {
+      System.out.println("******************************************************************************");
+      System.out.println("******* NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL ************");
+      System.out.println("******* REMOVE THIS BEFORE DEPLOYMENT, AND SETUP DEFAULT USERS DIRECTLY  *****");
+      System.out.println("**** ** ON YOUR REMOTE DATABASE                 ******************************");
+      System.out.println("******************************************************************************");
+      UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
+      UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
+      UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
+      UserWithRoles user4 = new UserWithRoles("user4", passwordUsedByAll, "user4@a.dk");
+      user1.addRole(Role.USER);
+      user1.addRole(Role.ADMIN);
+      user2.addRole(Role.USER);
+      user3.addRole(Role.ADMIN);
+      //No Role assigned to user4
+      userWithRolesRepository.save(user1);
+      userWithRolesRepository.save(user2);
+      userWithRolesRepository.save(user3);
+      userWithRolesRepository.save(user4);
+    }
 
-    System.out.println("**************************");
-    System.out.println("**************************");
-    System.out.println("**************************");
-    System.out.println("**************************");
-    UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@bib.dk");
-    UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@bib.dk");
-    UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@bib.dk");
-    UserWithRoles user4 = new UserWithRoles("user4", passwordUsedByAll, "user4@bib.dk");
-    user1.addRole(Role.USER);
-    user1.addRole(Role.ADMIN);
-    user2.addRole(Role.USER);
-    user3.addRole(Role.ADMIN);
-
-   // userWithRolesRepository.save(user1);
-   // userWithRolesRepository.save(user2);
-   // userWithRolesRepository.save(user3);
-   // userWithRolesRepository.save(user4);
   }
-}

@@ -6,7 +6,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.CorsConfigurationSource;
 import java.util.Arrays;
-
+/*
 @Configuration
 public class CorsConfig {
 
@@ -29,4 +29,6 @@ public class CorsConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-}
+   }
+
+ */
