@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
 //import org.springframework.security.oauth2.server.resource.authentication.AbstractOAuth2TokenAuthenticationToken;
+import org.springframework.security.oauth2.server.resource.authentication.AbstractOAuth2TokenAuthenticationToken;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,12 +31,12 @@ public class CustomOAuth2AccessDeniedHandler implements AccessDeniedHandler {
         if (Objects.nonNull(realmName)) {
             parameters.put("realm", realmName);
         }
-       /* if (request.getUserPrincipal() instanceof AbstractOAuth2TokenAuthenticationToken) {
+        if (request.getUserPrincipal() instanceof AbstractOAuth2TokenAuthenticationToken) {
             errorMessage = "The request requires privileges other than those provided by the access token.";
             parameters.put("error", "insufficient_scope");
             parameters.put("error_description", errorMessage);
             parameters.put("error_uri", "https://tools.ietf.org/html/rfc6750#section-3.1");
-        }*/
+        }
         Map<String, String> errorResponse = new HashMap<>();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
         errorResponse.put("timestamp", df.format(new Date()));

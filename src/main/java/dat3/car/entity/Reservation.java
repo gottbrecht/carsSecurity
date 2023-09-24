@@ -18,7 +18,7 @@ public class Reservation extends AdminDetails{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   int id;
   String username;
-  int carId;
+  int car_Id;
   @JsonFormat(pattern = "yyyy-MM-dd")
   LocalDate rentalDate;
 
@@ -28,7 +28,7 @@ public class Reservation extends AdminDetails{
   @ManyToOne
   Car car;
 
-  public Reservation(int carId, String userName, LocalDate date) {
+  public Reservation(int car_Id, String userName, LocalDate date) {
     super();
   }
 
@@ -44,8 +44,8 @@ public class Reservation extends AdminDetails{
     return username;
   }
 
-  public int getCarId() {
-    return carId;
+  public int getCar_Id() {
+    return car_Id;
   }
 
   public void setId(int id) {
@@ -56,8 +56,8 @@ public class Reservation extends AdminDetails{
     this.username = username;
   }
 
-  public void setCarId(int carId) {
-    this.carId = carId;
+  public void setCar_Id(int carId) {
+    this.car_Id = carId;
   }
 
   public void setRentalDate(LocalDate rentalDate) {
@@ -72,7 +72,7 @@ public class Reservation extends AdminDetails{
     this.car = car;
   }
 
-  public Reservation(int id, String username, int carId, LocalDate rentalDate, Car car, Member member) {
+  public Reservation(int id, String username, int car_Id, LocalDate rentalDate, Car car, Member member) {
     this.rentalDate = rentalDate;
     this.username = username;
     this.car = car;

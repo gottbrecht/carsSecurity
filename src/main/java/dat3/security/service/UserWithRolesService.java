@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.awt.print.PrinterJob;
+
 @Service
 public class UserWithRolesService extends UserWithRoles {
 
@@ -17,15 +19,14 @@ public class UserWithRolesService extends UserWithRoles {
     public UserWithRolesService(UserWithRolesRepository userWithRolesRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
     }
-}
-/*
+
     public UserWithRolesResponse getUserWithRoles(String id){
         UserWithRoles user = userWithRolesRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
         return new UserWithRolesResponse(user);
     }
 
     //Make sure that this can ONLY be called by an admin
-    public UserWithRolesResponse addRole(String username , Role role){
+    public UserWithRolesResponse addUserWithRole(String username , Role role){
         UserWithRoles user = userWithRolesRepository.findById(username).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
         user.addRole(role);
         return new UserWithRolesResponse(userWithRolesRepository.save(user));
@@ -46,14 +47,14 @@ public class UserWithRolesService extends UserWithRoles {
         user.setPassword(body.getPassword());
         return new UserWithRolesResponse(userWithRolesRepository.save(user));
     }
-*/
+
     /**
      * @param body - the user to be added
      * @param role - the role to be added to the user - pass null if no role should be added
      * @return the user added
      */
 
-/*
+
     public UserWithRolesResponse addUserWithRoles(UserWithRolesRequest body, Role role) {
         if (userWithRolesRepository.existsById(body.getUsername())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This user name is taken");
@@ -69,4 +70,3 @@ public class UserWithRolesService extends UserWithRoles {
         return new UserWithRolesResponse(userWithRolesRepository.save(userWithRoles));
     }
 }
-*/

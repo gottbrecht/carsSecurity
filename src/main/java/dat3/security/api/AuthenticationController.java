@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 import static org.springframework.security.oauth2.jwt.JwtClaimsSet.builder;
-/*
+
 @RestController
 @RequestMapping("/api/auth/")
 @CrossOrigin
@@ -48,7 +48,8 @@ public class AuthenticationController<JwtClaimsSet, JwsHeader> {
         this.authenticationManager = authenticationManager;
         this.encoder = encoder;
     }
-
+}
+/*
     @PostMapping("login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
 
@@ -82,5 +83,6 @@ public class AuthenticationController<JwtClaimsSet, JwsHeader> {
         }
 
     }
- }
+  }
+
 */
